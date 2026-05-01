@@ -32,7 +32,10 @@ def md_to_latex(md_content):
             continue
         if line.startswith('# '):
             text = line[2:].strip()
-            result.append(f'\\chapter{{{text}}}\n')
+            if '前言' in text:
+                result.append(f'\\chapter*{{{text}}}\n')
+            else:
+                result.append(f'\\chapter{{{text}}}\n')
             continue
         if line.startswith('## '):
             text = line[3:].strip()
