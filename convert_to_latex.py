@@ -27,8 +27,9 @@ def md_to_latex(md_content):
             continue
 
         if line.startswith('# PART'):
-            text = line[1:].strip()
-            result.append(f'\\part{{{text}}}\n')
+            if 'chapter' not in output_path:
+                text = line[1:].strip()
+                result.append(f'\\part{{{text}}}\n')
             continue
         if line.startswith('# '):
             text = line[2:].strip()
