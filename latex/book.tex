@@ -1,0 +1,111 @@
+\documentclass[12pt,a4paper,openany]{ctexbook}
+
+% Packages
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{indentfirst}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Code listing style
+\lstset{
+    backgroundcolor=\color{gray!10},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    tabsize=4
+}
+
+% Hyperref settings
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+    pdftitle={重塑组织逻辑},
+    pdfauthor={老王}
+}
+
+% Chapter style
+\CTEXsetup[format={\Large\bfseries}, name={第, 章}]{chapter}
+\CTEXsetup[titleformat={\Large\bfseries}]{section}
+\CTEXsetup[titleformat={\Large\bfseries}]{subsection}
+
+\begin{document}
+
+% Title page
+\begin{titlepage}
+    \centering
+    \vspace*{\fill}
+
+    {\Huge\bfseries 重塑组织逻辑}\\[2ex]
+    {\Large Beyond Control: A New Logical Organism in the AI Era}\\[4ex]
+
+    \vspace{3cm}
+    {\large 老王}\\[2ex]
+    {\large 2026}
+
+    \vspace*{\fill}
+\end{titlepage}
+
+% Preface
+\input{latex/preface.tex}
+
+% Table of contents
+\tableofcontents
+
+% Part I
+\input{latex/part-i.tex}
+\input{latex/chapter01.tex}
+\input{latex/chapter02.tex}
+\input{latex/chapter03.tex}
+
+% Part II
+\input{latex/part-ii.tex}
+\input{latex/chapter04.tex}
+\input{latex/chapter05.tex}
+\input{latex/chapter06.tex}
+\input{latex/chapter07.tex}
+
+% Part III
+\input{latex/part-iii.tex}
+\input{latex/chapter08.tex}
+\input{latex/chapter09.tex}
+\input{latex/chapter10.tex}
+\input{latex/chapter11.tex}
+
+% Part IV
+\input{latex/part-iv.tex}
+\input{latex/chapter12.tex}
+\input{latex/chapter13.tex}
+\input{latex/chapter14.tex}
+\input{latex/chapter15.tex}
+\input{latex/chapter16.tex}
+
+% Part V
+\input{latex/part-v.tex}
+\input{latex/chapter17.tex}
+\input{latex/chapter18.tex}
+\input{latex/chapter19.tex}
+\input{latex/chapter20.tex}
+\input{latex/chapter21.tex}
+
+% Part VI
+\input{latex/part-vi.tex}
+\input{latex/chapter22.tex}
+\input{latex/chapter23.tex}
+\input{latex/chapter24.tex}
+
+% Part VII
+\input{latex/part-vii.tex}
+\input{latex/chapter25.tex}
+\input{latex/chapter26.tex}
+\input{latex/chapter27.tex}
+
+\end{document}
