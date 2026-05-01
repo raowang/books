@@ -26,41 +26,45 @@ def md_to_latex(md_content):
             result.append(line)
             continue
 
-        # Headers
         if line.startswith('# '):
             text = line[2:].strip()
             result.append(f'\\chapter{{{text}}}\n')
-        elif line.startswith('## '):
+            continue
+        if line.startswith('## '):
             text = line[3:].strip()
             result.append(f'\\section{{{text}}}\n')
-        elif line.startswith('### '):
+            continue
+        if line.startswith('### '):
             text = line[4:].strip()
             result.append(f'\\subsection{{{text}}}\n')
-        elif line.startswith('#### '):
+            continue
+        if line.startswith('#### '):
             text = line[5:].strip()
             result.append(f'\\subsubsection{{{text}}}\n')
-        # Horizontal rule
-        elif line.strip() == '---':
-            result.append('\\hline\\newpage')
+            continue
+        if line.strip() == '---':
+            result.append('\\newpage')
+            continue
         # Empty line
         elif line.strip() == '':
             result.append('')
         # List items
-        elif line.strip().startswith('- '):
-            if not in_list:
-                result.append('\\begin{itemize}')
-                in_list = True
-            text = line.strip()[2:]
-            # Handle **bold** inside
-            text = re.sub(r'\*\*(.+?)\*\*', r'\\textbf{\1}', text)
-            result.append(f'\\item {text}')
-        elif line.strip().startswith('* '):
+        if line.strip().startswith('- '):
             if not in_list:
                 result.append('\\begin{itemize}')
                 in_list = True
             text = line.strip()[2:]
             text = re.sub(r'\*\*(.+?)\*\*', r'\\textbf{\1}', text)
             result.append(f'\\item {text}')
+            continue
+        if line.strip().startswith('* '):
+            if not in_list:
+                result.append('\\begin{itemize}')
+                in_list = True
+            text = line.strip()[2:]
+            text = re.sub(r'\*\*(.+?)\*\*', r'\\textbf{\1}', text)
+            result.append(f'\\item {text}')
+            continue
         # Close list on non-list
         elif in_list:
             result.append('\\end{itemize}')
