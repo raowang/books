@@ -54,7 +54,6 @@ def md_to_latex(md_content):
             result.append(f'\\subsubsection{{{text}}}\n')
             continue
         if line.strip() == '---':
-            result.append('\\newpage')
             continue
         # Empty line
         elif line.strip() == '':
