@@ -148,7 +148,8 @@ files = [
     ('第二十七章-结语.md', 'latex/chapter27.tex'),
 ]
 
-base_dir = '/Users/uu/workspaces/books/Beyond-Control'
+import os
+base_dir = os.path.dirname(os.path.abspath(__file__))
 for md_file, tex_file in files:
     input_path = os.path.join(base_dir, md_file)
     output_path = os.path.join(base_dir, tex_file)
