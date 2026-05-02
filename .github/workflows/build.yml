@@ -3,6 +3,8 @@ name: Build Book
 on:
   push:
     branches: [main]
+    tags:
+      - '*'
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -53,3 +55,32 @@ jobs:
         with:
           name: 重塑组织逻辑
           path: latex/book.pdf
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') && github.repository_owner == 'raowang'
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Download PDF artifact
+        uses: actions/download-artifact@v6
+        with:
+          name: 重塑组织逻辑
+          path: ./dist
+
+      - name: Get tag version
+        id: tag
+        run: echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          draft: false
+          prerelease: false
+          files: ./dist/book.pdf
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
