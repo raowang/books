@@ -14,44 +14,14 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: '3.11'
-
-      - name: Install Python dependencies
-        run: pip install markdown
-
-      - name: Detect changed Markdown files
-        id: changed
-        run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            echo "files=$(git diff --name-only origin/${{ github.base_ref }} HEAD | grep '\.md$' | tr '\n' ' ')" >> $GITHUB_OUTPUT
-          else
-            echo "files=$(git diff --name-only HEAD~1 HEAD | grep '\.md$' | tr '\n' ' ')" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Convert Markdown to LaTeX
-        run: |
-          if [ -n "${{ steps.changed.outputs.files }}" ]; then
-            python3 .github/scripts/convert_to_latex.py ${{ steps.changed.outputs.files }}
-          else
-            echo "No markdown files changed, skipping conversion"
-          fi
-
-      - name: Compile LaTeX
-        uses: xu-cheng/latex-action@v4
-        with:
-          root_file: latex/book.tex
-          latexmk_use_xelatex: true
-          latexmk_shell_escape: true
-          work_in_root_file_dir: true
+      - name: Build PDF
+        run: make build
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v6
         with:
           name: 重塑组织逻辑
-          path: latex/book.pdf
+          path: release/重塑组织逻辑.pdf
 
   release:
     needs: build
@@ -68,14 +38,14 @@ jobs:
         uses: actions/download-artifact@v6
         with:
           name: 重塑组织逻辑
-          path: ./dist
+          path: ./release
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           draft: false
           prerelease: false
-          files: ./dist/book.pdf
+          files: ./release/重塑组织逻辑.pdf
           generate_release_notes: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
