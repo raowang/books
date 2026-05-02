@@ -30,7 +30,7 @@ jobs:
       - name: Compile LaTeX
         uses: xu-cheng/latex-action@v4
         with:
-          root_file: latex/book.tex
+          root_file: book.tex
           latexmk_use_xelatex: true
           latexmk_shell_escape: true
           work_in_root_file_dir: true
@@ -39,7 +39,7 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: 重塑组织逻辑
-          path: release/重塑组织逻辑.pdf
+          path: book.pdf
 
   release:
     needs: build
@@ -56,14 +56,14 @@ jobs:
         uses: actions/download-artifact@v6
         with:
           name: 重塑组织逻辑
-          path: ./release
+          path: .
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           draft: false
           prerelease: false
-          files: ./release/重塑组织逻辑.pdf
+          files: ./book.pdf
           generate_release_notes: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
