@@ -11,12 +11,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@latest
         with:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@latest
         with:
           python-version: '3.11'
 
@@ -49,7 +49,7 @@ jobs:
           work_in_root_file_dir: true
 
       - name: Upload PDF artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@latest
         with:
           name: 重塑组织逻辑
           path: latex/book.pdf
