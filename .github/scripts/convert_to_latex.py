@@ -11,6 +11,19 @@ def md_to_latex(md_content):
     in_list = False
     in_code_block = False
 
+    def chquote(s):
+        """Replace ASCII double quotes with Chinese curly quotes (toggles left/right)."""
+        if not hasattr(chquote, '_left'):
+            chquote._left = True
+        parts = []
+        for c in s:
+            if c == '"':
+                parts.append('\u201c' if chquote._left else '\u201d')
+                chquote._left = not chquote._left
+            else:
+                parts.append(c)
+        return ''.join(parts)
+
     for line in lines:
         # Code blocks
         if line.strip().startswith('```'):
@@ -86,6 +99,7 @@ def md_to_latex(md_content):
         # Bold and italic
         line = re.sub(r'\*\*(.+?)\*\*', r'\\textbf{\1}', line)
         line = re.sub(r'\*(.+?)\*', r'\\textit{\1}', line)
+        line = chquote(line)
 
         # Blockquotes (skip for now)
         if line.strip().startswith('>'):

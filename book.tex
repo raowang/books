@@ -2,9 +2,17 @@
 
 % Packages
 \usepackage{geometry}
-\geometry{margin=1in}
+\geometry{
+  top=25mm,
+  bottom=25mm,
+  inner=32mm,
+  outer=22mm,
+  bindingoffset=0mm
+}
 \usepackage{indentfirst}
+\setlength{\parindent}{2em}
 \usepackage{setspace}
+\setstretch{1.5}
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{hyperref}
@@ -33,16 +41,21 @@
     pdfauthor={老王}
 }
 
-% Chapter style
-\CTEXsetup[format={\centering\Large\bfseries}, name={第, 章}]{chapter}
-\CTEXsetup[titleformat={\Large\bfseries}]{section}
-\CTEXsetup[titleformat={\Large\bfseries}]{subsection}
-\CTEXsetup[titleformat={\centering\Large\bfseries}]{part}
+% Chapter style - 按五号字规格
+\ctexset{
+  chapter = { format={\centering\Large\bfseries}, name={第, 章}, number={\arabic{chapter}} },
+  section = { format={\raggedright\Large\bfseries} },
+  subsection = { titleformat={\normalsize\bfseries} },
+  part = { titleformat={\centering\Large\bfseries} }
+}
 
-% Page style
+% Page style - 页眉书名，页脚居中页码
 \pagestyle{fancy}
 \fancyhf{}
+\fancyhead[L]{\small 重塑组织逻辑}
+\fancyhead[R]{\small\leftmark}
 \fancyfoot[C]{\thepage}
+\setlength{\headheight}{14pt}
 
 \begin{document}
 
