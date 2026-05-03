@@ -1,4 +1,4 @@
-# PART VII ·  面向未来
+# PART VII · 面向未来
 
 ---
 
